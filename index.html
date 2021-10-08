@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taschenrechner</title>
+    <link rel="manifest" href="manifest.json">
+    <style> 
+        body {
+    margin: 0;
+}
+table {
+    width: 100%;
+    height: 59vh;
+    background-color: rgb(60, 60, 60);
+    color: white;
+}
+
+td {
+    width: 25%;
+    text-align: center;
+    background-color: rgb(30, 30, 30);
+    font-size: 24px;
+}
+
+td:hover {
+    background-color: rgb(40, 40, 40);
+    cursor: pointer;
+}
+
+#resultArea {
+    height: 30vh;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    font-size: 50px;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+#result {
+    background-color: blue;
+}
+
+#result:hover {
+    background-color:rgb(2, 2, 226);
+}
+
+.highlight {
+    background-color: rgb(20, 20, 20);
+}
+    </style>
+
+    <script>
+        function appendOperation(opperation){
+            document.getElementById('resultArea').innerHTML +=opperation
+        }
+
+        function ergebnis() {
+            let container = document.getElementById('resultArea');
+            let result = eval(container.innerHTML);
+            container.innerHTML = result;
+        }
+
+        function deleteLast(){
+            let container = document.getElementById('resultArea');
+            if(container.innerHTML.endsWith(' ')) {
+                container.innerHTML = container.innerHTML.slice(0,-3);
+            } else {
+            container.innerHTML = container.innerHTML.slice(0,-1);
+            }
+        }
+
+        function deleteAll(){
+            let container = document.getElementById('resultArea');
+            container.innerHTML = container.innerHTML.slice(0,-500);
+        }
+    </script>
+
+</head>
+<body>
+        <div id="resultArea"></div>
+
+
+        <table>
+            <tr>
+                <td></td>
+                <td></td>
+                <td onclick="deleteAll()">C</td>
+                <td onclick="deleteLast()">DEL</td>
+            </tr>
+            <tr>
+             <td onclick="appendOperation(7)">7</td>
+             <td onclick="appendOperation(8)">8</td>
+             <td onclick="appendOperation(9)">9</td>
+             <td onclick="appendOperation(' / ')" class="highlight">/</td>
+
+              <tr>
+                 <td onclick="appendOperation(4)">4</td>
+                 <td onclick="appendOperation(5)">5</td>
+                 <td onclick="appendOperation(6)">6</td>
+                 <td onclick="appendOperation(' * ')" class="highlight">*</td>
+
+            	 <tr>
+                     <td onclick="appendOperation(1)">1</td>
+                     <td onclick="appendOperation(2)">2</td>
+                     <td onclick="appendOperation(3)">3</td>
+                     <td onclick="appendOperation(' + ')" class="highlight">+</td>
+
+                   <tr>
+                     <td onclick="appendOperation(0)">0</td>
+                     <td onclick="appendOperation('.')">,</td>
+                     <td onclick="ergebnis()" id="result">=</td>
+                     <td onclick="appendOperation(' - ')" class="highlight">-</td>
+                    </tr>
+                  </tr>
+                </tr>
+            </tr>
+        </table>
+</body>
+</html>
